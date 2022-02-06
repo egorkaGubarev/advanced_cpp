@@ -1,29 +1,28 @@
 #include <iostream>
 #include <chrono>
 #include <cmath>
-#include <string>
 
 typedef unsigned int uint;
 
 template <typename format>
 class Timer{
     public:
-        Timer(): start_{std::chrono::steady_clock::now()}, delta_{0}, status_{"pause"}{}
+        Timer(): start_{std::chrono::steady_clock::now()}, delta_{0}, is_running_{false}{}
 
         void run()
         {
-            if (status_ == "pause") {
+            if (!is_running_) {
                 start_ = std::chrono::steady_clock::now();
-                status_ = "run";
+                is_running_ = true;
             }
         }
 
         void pause()
         {
-            if (status_ == "run") {
+            if (is_running_) {
                 const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
                 const std::chrono::duration delta = now - start_;
-                status_ = "pause";
+                is_running_ = false;
                 delta_ += delta;
             }
         }
@@ -37,7 +36,7 @@ class Timer{
         }
 
     private:
-        std::string status_;
+        bool is_running_;
         std::chrono::steady_clock::time_point start_;
         std::chrono::steady_clock::duration delta_;
 };
