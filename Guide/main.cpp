@@ -2,6 +2,7 @@
 #include <map>
 #include <random>
 #include <string>
+#include <tuple>
 #include <unordered_map>
 #include <vector>
 
@@ -39,64 +40,42 @@ struct Name
 {
     Name() = default;
 
-    Name(std::string surname, std::string name, std::string patronymic):
-    name_{std::move(name)}, surname_{std::move(surname)}, patronymic_{std::move(patronymic)} {}
+    Name(const std::string& surname, const std::string& name, const std::string& patronymic)
+    {
+        std::get<0>(name_) = surname;
+        std::get<1>(name_) = name;
+        std::get<2>(name_) = patronymic;
+    }
 
     friend bool operator==(const Name& lhs, const Name& rhs)
     {
-        if (lhs.name_ == rhs.name_ and lhs.surname_ == rhs.surname_ and lhs.patronymic_ == rhs.patronymic_){
-            return true;
-        }
-        return false;
+        return lhs.name_ == rhs.name_;
     }
 
     friend bool operator<(const Name& lhs, const Name& rhs)
     {
-        if (lhs.surname_ < rhs.surname_){
-            return true;
-        }
-        else{
-            if(lhs.surname_ > rhs.surname_){
-                return false;
-            }
-            else{
-                if(lhs.name_ < rhs.name_){
-                    return true;
-                }
-                else{
-                    if(lhs.name_ > rhs.name_){
-                        return false;
-                    }
-                    else{
-                        if(lhs.patronymic_ < rhs.patronymic_){
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-
+        return lhs.name_ < rhs.name_;
     }
 
     friend std::ostream& operator << (std::ostream& out, const Name& arg)
     {
-        std::cout << arg.surname_ << ' ' << arg.name_ << ' ' << arg.patronymic_;
+        const std::string& surname = std::get<0>(arg.name_);
+        const std::string& name = std::get<1>(arg.name_);
+        const std::string& patronymic = std::get<2>(arg.name_);
+        std::cout << surname << ' ' << name << ' ' << patronymic;
         return out;
     }
 
-    std::string name_, surname_, patronymic_;
+    std::tuple<std::string, std::string, std::string> name_;
 };
 
 class Name_Hash{
 public:
     uint operator()(const Name& name) const
     {
-        const uint name_hash = std::hash<std::string>{}(name.name_);
-        const uint surname_hash = std::hash<std::string>{}(name.surname_);
-        const uint patronymic_hash = std::hash<std::string>{}(name.patronymic_);
+        const uint name_hash = std::hash<std::string>{}(std::get<1>(name.name_));
+        const uint surname_hash = std::hash<std::string>{}(std::get<0>(name.name_));
+        const uint patronymic_hash = std::hash<std::string>{}(std::get<2>(name.name_));
         const uint hash = name_hash + surname_hash + patronymic_hash;
         return hash;
     }

@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: Guide
+# Project: Time
 # Configurations: Debug
 # =============================================================================
 
@@ -39,49 +39,49 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/gubar/CLionProjects/Cpp/Lesson_2/Guide/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/gubar/CLionProjects/Time/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target Guide
+# Object build statements for EXECUTABLE target Time
 
 
 #############################################
-# Order-only phony target for Guide
+# Order-only phony target for Time
 
-build cmake_object_order_depends_target_Guide: phony || CMakeFiles/Guide.dir
+build cmake_object_order_depends_target_Time: phony || CMakeFiles/Time.dir
 
-build CMakeFiles/Guide.dir/main.cpp.obj: CXX_COMPILER__Guide_Debug C$:/Users/gubar/CLionProjects/Cpp/Lesson_2/Guide/main.cpp || cmake_object_order_depends_target_Guide
-  DEP_FILE = CMakeFiles\Guide.dir\main.cpp.obj.d
+build CMakeFiles/Time.dir/main.cpp.obj: CXX_COMPILER__Time_Debug C$:/Users/gubar/CLionProjects/Time/main.cpp || cmake_object_order_depends_target_Time
+  DEP_FILE = CMakeFiles\Time.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++23
-  OBJECT_DIR = CMakeFiles\Guide.dir
-  OBJECT_FILE_DIR = CMakeFiles\Guide.dir
-  TARGET_COMPILE_PDB = CMakeFiles\Guide.dir\
-  TARGET_PDB = Guide.pdb
+  OBJECT_DIR = CMakeFiles\Time.dir
+  OBJECT_FILE_DIR = CMakeFiles\Time.dir
+  TARGET_COMPILE_PDB = CMakeFiles\Time.dir\
+  TARGET_PDB = Time.pdb
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Guide
+# Link build statements for EXECUTABLE target Time
 
 
 #############################################
-# Link the executable Guide.exe
+# Link the executable Time.exe
 
-build Guide.exe: CXX_EXECUTABLE_LINKER__Guide_Debug CMakeFiles/Guide.dir/main.cpp.obj
+build Time.exe: CXX_EXECUTABLE_LINKER__Time_Debug CMakeFiles/Time.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\Guide.dir
+  OBJECT_DIR = CMakeFiles\Time.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_COMPILE_PDB = CMakeFiles\Guide.dir\
-  TARGET_FILE = Guide.exe
-  TARGET_IMPLIB = libGuide.dll.a
-  TARGET_PDB = Guide.pdb
+  TARGET_COMPILE_PDB = CMakeFiles\Time.dir\
+  TARGET_FILE = Time.exe
+  TARGET_IMPLIB = libTime.dll.a
+  TARGET_PDB = Time.pdb
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\gubar\CLionProjects\Cpp\Lesson_2\Guide\cmake-build-debug && "C:\Programs\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\gubar\CLionProjects\Time\cmake-build-debug && "C:\Programs\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -92,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\gubar\CLionProjects\Cpp\Lesson_2\Guide\cmake-build-debug && "C:\Programs\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\gubar\CLionProjects\Cpp\Lesson_2\Guide -BC:\Users\gubar\CLionProjects\Cpp\Lesson_2\Guide\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\gubar\CLionProjects\Time\cmake-build-debug && "C:\Programs\CLion 2021.3.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\gubar\CLionProjects\Time -BC:\Users\gubar\CLionProjects\Time\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -102,7 +102,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build Guide: phony Guide.exe
+build Time: phony Time.exe
 
 # =============================================================================
 # Folder targets.
@@ -110,9 +110,9 @@ build Guide: phony Guide.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/gubar/CLionProjects/Cpp/Lesson_2/Guide/cmake-build-debug
+# Folder: C:/Users/gubar/CLionProjects/Time/cmake-build-debug
 
-build all: phony Guide.exe
+build all: phony Time.exe
 
 # =============================================================================
 # Built-in targets
