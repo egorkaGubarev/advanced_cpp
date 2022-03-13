@@ -7,6 +7,12 @@
 
 typedef unsigned int uint;
 
+void get_square(uint& x)
+{
+    const uint square = x * x;
+    x = square;
+}
+
 template <typename T>
 std::ostream& operator << (std::ostream& out, const std::vector<T>& container)
 {
@@ -69,6 +75,8 @@ UnaryFunction for_each_parallel(InputIt first, InputIt last, UnaryFunction f, co
     const uint length_per_worker = (length + num_workers - 1) / num_workers;
     Timer<std::chrono::microseconds> external;
     external.run();
+    std::vector<std::future<UnaryFunction>> futures;
+    futures.reserve(num_workers);
     for(uint i = 0; i < num_workers; ++ i){
         Timer<std::chrono::microseconds> internal;
         internal.run();
@@ -76,6 +84,7 @@ UnaryFunction for_each_parallel(InputIt first, InputIt last, UnaryFunction f, co
         InputIt ending = std::next(first, (i + 1) * length_per_worker);
         std::future<UnaryFunction> my_future = std::async(std::launch::async, for_each_in_block<InputIt, UnaryFunction>,
                 beginning, ending, f);
+        futures.push_back(my_future);
         internal.pause();
         const uint internal_time = internal.get_time();
         std::cout << "Internal: " << internal_time << " mcs" << '\n';
@@ -89,11 +98,11 @@ UnaryFunction for_each_parallel(InputIt first, InputIt last, UnaryFunction f, co
 int main()
 {
     const uint element_first = 0;
-    const uint size = 100'000;
-    const uint workers = 1;
+    const uint size = 1'000'000;
+    const uint workers = 4;
     std::vector<uint> test(size);
     std::iota(std::begin(test), std::end(test), element_first);
-    for_each_parallel(std::begin(test), std::end(test), [](const uint x){return x * x;},
-                      workers);
+    for_each_parallel(std::begin(test), std::end(test), get_square,workers);
+    std::cout << "2-nd element: " << test[2] << '\n';
     return 0;
 }
