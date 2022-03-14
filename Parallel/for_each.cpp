@@ -84,10 +84,13 @@ UnaryFunction for_each_parallel(InputIt first, InputIt last, UnaryFunction f, co
         InputIt ending = std::next(first, (i + 1) * length_per_worker);
         std::future<UnaryFunction> my_future = std::async(std::launch::async, for_each_in_block<InputIt, UnaryFunction>,
                 beginning, ending, f);
-        futures.push_back(my_future);
+        futures.push_back(std::move(my_future));
         internal.pause();
         const uint internal_time = internal.get_time();
         std::cout << "Internal: " << internal_time << " mcs" << '\n';
+    }
+    for(std::future<UnaryFunction>& my_future: futures){
+        my_future.get();
     }
     external.pause();
     const uint external_time = external.get_time();
